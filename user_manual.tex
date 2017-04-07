@@ -1,0 +1,215 @@
+\documentclass[a4paper,titlepage,12pt]{article}
+
+%% Language and font encodings
+\usepackage[swedish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{afterpage}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=black, pdfborder={0 0 0}]{hyperref}
+\usepackage{longtable}
+\usepackage[yyyymmdd]{datetime}
+\usepackage[bottom]{footmisc}
+\usepackage{titling}
+\usepackage{pbox}
+\usepackage{booktabs}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{changepage, titlesec}
+
+%Set page size
+\usepackage{geometry}
+\geometry{margin=3cm}
+\usepackage{parskip} 
+\setcounter{secnumdepth}{5}
+
+
+\renewcommand{\dateseparator}{-}
+\addto\captionsswedish{% Replace "swedish" with the language you use (if using babel)
+  \renewcommand{\contentsname}%
+    {Innehållsförteckning}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header and footer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\lhead{\includegraphics[scale=0.3]{images/logga.png}}
+\chead{System för 3D-kopiering}
+\rhead{\today}
+\setlength\headheight{26pt} 
+
+
+\lfoot{TDDD96 --- PUM \\ IEEE std 730}
+\rfoot{Grupp 9}
+
+\posttitle{\end{center}}
+
+\begin{document}
+\begin{titlepage}
+
+% Title text
+\topskip0pt
+\vspace*{\fill}
+\huge
+\textbf{Användarmanual} \\
+\Large
+System för 3D-kopiering \\
+\noindent\rule{17cm}{0.4pt}
+\bigskip
+
+\small
+\textbf{Hampus Dunström \\
+Olof Holmberg \\
+Gustav Jannering \\
+Michael Karlsson \\
+Martin Lundberg \\
+Hannes Tuhkala \\
+Fredrik Wallström}
+\bigskip
+\bigskip
+
+Handledare: Sam Le \\
+Examinator: Kristian Sandahl
+
+\date{\today}
+\vspace*{\fill}
+
+% Image 
+\vspace*{\fill}
+\begin{minipage}[b]{0.7\textwidth}
+	\includegraphics[width=8cm]{images/liu-logga.png}
+\end{minipage}
+\begin{minipage}[b]{0.4\textwidth}
+	\normalsize
+	\textit{Linköpings universitet} \\
+	\textit{SE-581 83 Linköping, Sverige}\\
+	\textit{013-28 10 00, www.liu.se}
+\end{minipage}
+
+\end{titlepage}
+\newpage
+\begin{center}
+\pagenumbering{gobble}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%						Medlemmar
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{\centering Projektidentitet}
+
+System för 3D-kopiering, VT 2017, PUM-9 \\ 
+Linköpings Tekniska Högskola, IDA
+  
+\bigskip
+
+\scalebox{0.8}{
+\begin{tabular}{|l|l|l|l|}
+	\hline
+    \rowcolor{Gray}
+	\textbf{Namn} & \textbf{Ansvar} & \textbf{Telefon} & \textbf{E-post} \\
+	\hline
+    Hampus Dunström & Utvecklingsledare & 0763279292 & hamdu013@student.liu.se\\
+    \hline
+    Olof Holmberg & Testledare & 0725227007 & oloho254@student.liu.se\\
+    \hline
+    Gustav Jannering & Analysansvarig & 0706567093 & gusja113@student.liu.se\\
+    \hline
+    Michael Karlsson & Teamledare & 0735807120 & micka199@student.liu.se\\
+    \hline
+    Martin Lundberg & Arkitekt & 0762436905 & marlu819@student.liu.se\\
+    \hline
+    Hannes Tuhkala & Dokumentansvarig \& konfigurationsansvarig & 0760175790 & hantu447@student.liu.se\\
+    \hline
+    Fredrik Wallström & Kvalitetssamordnare & 0705826972 & frewa814@student.liu.se\\
+    \hline
+\end{tabular}}
+
+\bigskip
+\textbf{Beställare}: Maria Magnusson, maria.magnusson@liu.se 
+\\Linköpings universitet ISY
+
+\newpage
+\tableofcontents
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%					Dokumenthistorik
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{\centering Dokumenthistorik}
+  \renewcommand*{\arraystretch}{1.4}
+ \centering
+\scalebox{1.1}{
+\begin{tabular}{|l|l|l|l|}
+	\hline
+    \rowcolor{Gray}
+	\textbf{Version} & \textbf{Datum} & \textbf{Utförda förändringar} & \textbf{Utförda av} \\
+	\hline
+    0.1 & 2017-02-18 & Dokumentet skapades & Fredrik Wallström \\
+    \hline
+\end{tabular}}
+\end{center}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%					Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{arabic}
+\section{Inledning}
+	\subsection{Parter}
+	%% Skriv om alla inblandade i projektet här
+	
+	\subsection{Definitioner}
+	%% Definitioner som används i dokumentet
+    
+\newpage  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%					Mjukvara
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mjukvara}
+	%% Beskriv hur mjukvaran är uppbyggd  
+ 
+\newpage
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%					Grafiskt användargränsnitt
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Grafiskt användargränsnitt}
+	%% Skriv hur GUI:t är uppbyggt
+	
+\newpage 
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%					Kommandoradsgränsnitt
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Kommandoradsgränsnitt}
+	%% Skriv hur Kommmandoradsgrännsnittet är uppbyggt
+	
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%					Använda systemet
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Att använda systemet}
+	%% Skriv om hur man använder systemet
+	
+\newpage  
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%					Felsökning
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\section{Felsökning}
+ 	%% Skriv om eventuella tips till att felsöka diverse problem
+\newpage
+    
+%\bibliographystyle{alpha}
+%\bibliography{sample}
+
+\end{document}
+
