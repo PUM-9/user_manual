@@ -206,11 +206,11 @@ Linköpings Tekniska Högskola, IDA
 %					Användargränssnitt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 \section{Användargränssnitt}
-	\subsection{Grafiskt användargränsnitt}
+	\subsection{Grafiskt användargränssnitt}
 		%% Skriv hur GUI:t är uppbyggt
 	
 	\subsection{Kommandoradsgränssnitt}
-		Kommandoradsgränssnittets syfte är att göra det möjligt att använda systemet genom kommandoradsanrop. Kommandoradsgränsnittet är implementerad som en klass i C++ och tar alltså in anrop ifrån kommandoraden och utför sedan den önskade funktionen som angivits. Kommandoradsgränsnittet integrerar registrerings- och meshningsklassen till ett körbart program som gör det möjligt att generera en utskriftbar 3D-mesh utifrån flera stycke icke kompletta punktmoln.
+		Kommandoradsgränssnittets syfte är att göra det möjligt att använda systemet genom kommandoradsanrop. Kommandoradsgränsnittet är implementerad som en klass i C++ och tar alltså in anrop ifrån kommandoraden och utför sedan den önskade funktionen som angivits. Kommandoradsgränsnittet integrerar registrerings- och meshningsklassen till ett körbart program som gör det möjligt att generera en utskriftsbar 3D-mesh utifrån flera stycke icke kompletta punktmoln.
 	
 \newpage
 
@@ -218,8 +218,40 @@ Linköpings Tekniska Högskola, IDA
 %					Använda systemet
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Att använda systemet}
-	%% Skriv om hur man använder systemet
+	Som användare av systemet finns det två stycken sätt att använda systemet, ett kommandoradsgränssnitt, 3DCopy, samt ett grafiskt användargränssnitt. Med hjälp av dessa gränssnitt är det möjligt att ta en uppsättningen av icke kompletta punktmoln för att generera en utskriftsbar 3D-mesh. Gränsnitterna är i anpassade för att ta in en uppsättning av punktmoln (pcd-filer). För att använda systemet kan det vara vettigt att filtrera de punktmoln som är tänkta att använda. Därför har det skapas ett filtreringsprogram som filtrera bort skräppunkter ur ett punktmoln.
 	
+	\subsection{Att använda filtreringen}
+	
+	\subsection{Att använda grafiska användargränssnittet}
+	
+	\subsection{Att använda kommandoradsgränsnittet}
+		För att använda programmet 3DCopy så kör man kommandot:
+		
+		./3DCopy pcdfile1 pcdfile2 pcdfile3 ... outputfile
+		
+		Där godtyckligt antal pcdfiler kan väljas. Dessa punktmoln kommer sedan att registreras och efter det kommer en mesh att genereras i det givna outputfile namnet. Ett exempel på hur man använder programmet från kommandoraden ser ut såhär:
+		
+		./3DCopy pcd\_file\_1 pcd\_file\_2 result
+		
+		Detta kommer alltså att generera en mesh vid namn result som sparas i ett stl format. Denna fil kan sedan användas för att inspekteras i till exempel meshlab eller för att skriva ut objektet med en 3D-skrivare. Värt att nämna är att programmet kan även ta in en mapp fylld med pcd filer istället för enstaka pcd filer som ska. Programmet söker då automatisk igenom mappen och plockar ut de filer som ska registreras, exempel på hur detta ser ut:
+		
+		./3DCopy map\_with\_files result
+		
+		Programmet 3DCopy innehåller ett antal underkommandon enligt formen
+		
+		./3DCopy [kommando] pcdfile1 pcdfile2 pcdfile3 ... outputfile
+		
+		Detta ger en möjlighet för användaren att välja vilken komponent som ska köras. Användaren kan enbart välja att köra meshningskomponenten eller registreringskomponenten. De kommandon som finns tillgängliga beskrivs nedan:
+		
+		\begin{itemize}
+			\item \textbf{-m} Enbart mesha objektet utifrån ett givet komplett punktmoln.
+			\item \textbf{-r} Enbart registrera punktmoln för att generera ett komplett punktmoln, hoppar över meshningen.
+			\item \textbf{-v} Gör att programmet talar om mer nödvändig information om vad som händer till användaren.
+		\end{itemize}
+		
+		För att enbart registrera punktmoln kan således detta kommando användas:
+		
+		./3DCopy -r pcdfile1 pcdfile2 pcdfile3 ... outputfile
 \newpage  
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
