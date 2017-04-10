@@ -168,7 +168,7 @@ Linköpings Tekniska Högskola, IDA
 		Under projektets gång fanns följande parter aktiva:
 		
 		\begin{itemize}
-			\item Beställare och Kund: Maria Magnusson, Linköpings universitet ISY
+			\item Beställare \& Kund: Maria Magnusson, Linköpings universitet ISY
 			\item Examinator: Kristian Sandahl
 			\item Handledare: Sam Lee
 			\item Projektgrupp: 3D-Kopiering
@@ -179,6 +179,8 @@ Linköpings Tekniska Högskola, IDA
 		
 		\begin{itemize}
 			\item ISY - Institutionen för systemteknik
+			\item ICP - Iterative closest point (iterativ närmast punkt)
+			\item PCL - Point cloud library
 		\end{itemize}
     
 \newpage  
@@ -187,8 +189,17 @@ Linköpings Tekniska Högskola, IDA
 %					Mjukvara
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mjukvara}
-	%% Beskriv hur mjukvaran är uppbyggd  
- 
+ 	Mjukvaran i systemet består i huvuddel av två stora komponenter, en registreringskomponent samt en meshningskomponent. Registreringskomponenten har som syfte at registrera punktmoln så de bildar en komplett modell av ett punktmoln. Meshningskomponenten har som syfte att generera en 3D-mesh utifrån ett komplett punktmoln. Systemets mjukvara består även av ett filter vars syfte är att filtrera olika punkmoln vid behov.
+	
+	\subsection{Registreringskomponent}
+		Registreringskomponenten är implementerad som en klass i C++. Syftet med registreringen är att generera ett komplett punktmoln utifrån flera icke kompletta punktmoln. Registreringsklassen tar in en vektor med flera icke kompletta punktmoln. Klassen går sedan igenom alla punktmoln i vektorn och adderar dem till ett komplett punktmoln. För att uträtta detta används ICP algoritm ifrån biblioteket PCL. Algoritms metod för att registrera punktmolnen går ut på att minimera distansen mellan punkterna i molnen. När sedan ett komplett punktmoln har genererats returneras detta.
+	
+	\subsection{Meshningskomponent}
+		Meshningskomponenten är implementerad som en klass i C++. Syftet med meshningen är att generera en 3D-mesh utifrån ett komplett punktmoln. En 3D-mesh är ett 3D-objekt uppbyggt av polygoner. Denna 3D-mesh används för att göra det möjligt att skriva ut objektet i en 3D-skrivare. Meshningsklassen tar in ett komplett punkmoln som parameter och tar sedan ut alla punkters normaler i molnet. För att generera en 3D-mesh används Poisson surface reconstruction algoritm. Algoritm kräver en uppsättning av 3D-punkter med orienterade normaler för att kunna generera en mesh av objektet. Klassen returnerar sedan den färdiga meshen.
+	
+	\subsection{Filter}
+		Filtret är implementerat som en egen funktionalitet eftersom tanken är att det ska vara möjligt att filtrera punktmolnet om så önskas. Filtrets syfte är att ta bort skräppunkter samt pinnen ifrån punkmolnet, med pinnen menas den pinne som håller upp och roterar objektet. Filtret flyttar också det givna punktmolnet till origo. Filtret körs nu alltså med ett eget program och är inte integrerat i 3DCopy programmet. Filtret tar in ett punktmoln som parameter och returnerar sedan ett punktmoln utan skräpdata.
+		
 \newpage
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
