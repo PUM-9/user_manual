@@ -45,7 +45,7 @@
 \setlength\headheight{26pt} 
 
 
-\lfoot{TDDD96 --- PUM \\ IEEE std 730}
+\lfoot{TDDD96 --- PUM}
 \rfoot{Grupp 9}
 
 \posttitle{\end{center}}
@@ -156,6 +156,8 @@ Linköpings Tekniska Högskola, IDA
     	\hline
     	0.3 & 2017-05-02 & Manual för filtret & Martin Lundberg \\
     	\hline
+    	0.4 & 2017-05-11 & Flyttade teknisk information till teknisk dokument & Hannes Tuhkala \\
+    	\hline
 \end{tabular}}
 \end{center}
 \newpage
@@ -165,14 +167,14 @@ Linköpings Tekniska Högskola, IDA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagenumbering{arabic}
 \section{Inledning}
-	Detta dokument är en användarmanual för 3D-kopieringsprojektet på Linköpings universitet. Projektet pågick under vårterminen 2017 och utfördes av 7 stycken studenter ifrån universitetet. Projektet är en del i kursen TDDD96 - Kandidatprojekt i programvaruutveckling som ges vis Linköpings universitet. Användarmanualen beskriver hur produkten är utvecklad samt hur den används.
+	Detta dokument är en användarmanual för 3D-kopieringsprojektet på Linköpings universitet. Projektet pågick under vårterminen 2017 och utfördes av sju stycken studenter ifrån universitetet. Projektet är en del i kursen TDDD96 - Kandidatprojekt i programvaruutveckling som ges vid Linköpings universitet. Användarmanualen beskriver hur produkten används.
 	\subsection{Parter}
 		Under projektets gång fanns följande parter aktiva:
 		
 		\begin{itemize}
 			\item Beställare \& Kund: Maria Magnusson, Linköpings universitet ISY
 			\item Examinator: Kristian Sandahl
-			\item Handledare: Sam Lee
+			\item Handledare: Sam Le
 			\item Projektgrupp: 3D-Kopiering
 		\end{itemize}
 		
@@ -188,39 +190,10 @@ Linköpings Tekniska Högskola, IDA
 \newpage  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%					Mjukvara
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Mjukvara}
- 	Mjukvaran i systemet består i huvuddel av två stora komponenter, en registreringskomponent samt en meshningskomponent. Registreringskomponenten har som syfte att registrera punktmoln så de bildar en komplett modell av ett punktmoln. Meshningskomponenten har som syfte att generera en 3D-mesh utifrån ett komplett punktmoln. Systemets mjukvara består även av ett filter vars syfte är att filtrera olika punkmoln vid behov.
-	
-	\subsection{Registreringskomponent}
-		Registreringskomponenten är implementerad som en klass i C++. Syftet med registreringen är att generera ett komplett punktmoln utifrån flera icke kompletta punktmoln. Registreringsklassen tar in en vektor med flera icke kompletta punktmoln. Klassen går sedan igenom alla punktmoln i vektorn och adderar dem till ett komplett punktmoln. För att uträtta detta används ICP algoritm ifrån biblioteket PCL. Algoritms metod för att registrera punktmolnen går ut på att minimera distansen mellan punkterna i molnen. När sedan ett komplett punktmoln har genererats returneras detta.
-	
-	\subsection{Meshningskomponent}
-		Meshningskomponenten är implementerad som en klass i C++. Syftet med meshningen är att generera en 3D-mesh utifrån ett komplett punktmoln. En 3D-mesh är ett 3D-objekt uppbyggt av polygoner. Denna 3D-mesh används för att göra det möjligt att skriva ut objektet i en 3D-skrivare. Meshningsklassen tar in ett komplett punkmoln som parameter och tar sedan ut alla punkters normaler i molnet. För att generera en 3D-mesh används Poisson surface reconstruction algoritm. Algoritm kräver en uppsättning av 3D-punkter med orienterade normaler för att kunna generera en mesh av objektet. Klassen returnerar sedan den färdiga meshen.
-	
-	\subsection{Filter}
-		Filtret är uppbyggt för att kunna filtrera punktmoln som är insamlade med TreeD och den tillhörande hårdvaran till det systemet. För att kunna användas i 3DCopy ser filtret till att eventuell skräpdata filtreras bort och ser även till att pinnen som håller i föremålet som skannas tas bort. Filtret flyttar även objektet till origo i koordinatsystemet. Efter filtreringen är punktmolnet redo att registreras och användas i 3DCopy.
-		
-\newpage
- 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%					Användargränssnitt
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\section{Användargränssnitt}
-	\subsection{Grafiskt användargränssnitt}
-		%% Skriv hur GUI:t är uppbyggt
-	
-	\subsection{Kommandoradsgränssnitt}
-		Kommandoradsgränssnittets syfte är att göra det möjligt att använda systemet genom kommandoradsanrop. Kommandoradsgränsnittet är implementerad som en klass i C++ och tar alltså in anrop ifrån kommandoraden och utför sedan den önskade funktionen som angivits. Kommandoradsgränsnittet integrerar registrerings- och meshningsklassen till ett körbart program som gör det möjligt att generera en utskriftsbar 3D-mesh utifrån flera stycke icke kompletta punktmoln.
-	
-\newpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %					Använda systemet
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Att använda systemet}
-	Som användare av systemet finns det två stycken sätt att använda systemet, ett kommandoradsgränssnitt, 3DCopy, samt ett grafiskt användargränssnitt. Med hjälp av dessa gränssnitt är det möjligt att ta en uppsättningen av icke kompletta punktmoln för att generera en utskriftsbar 3D-mesh. Gränssnitten är anpassade för att ta in en uppsättning av punktmoln (pcd-filer). För att använda systemet kan det vara vettigt att filtrera de punktmoln som är tänkta att använda. Därför har det skapas ett filtreringsprogram som filtrerar bort skräppunkter ur ett punktmoln.
+	Som användare av systemet finns det två stycken sätt att använda systemet, ett kommandoradsgränssnitt, 3DCopy, samt ett grafiskt användargränssnitt. Med hjälp av dessa gränssnitt är det möjligt att ta en uppsättning av icke kompletta punktmoln för att generera en utskriftsbar 3D-mesh. Gränssnitten är anpassade för att ta in en uppsättning av punktmoln (.pcd-filer). För att använda systemet kan det vara vettigt att filtrera de punktmoln som är tänkta att använda. Därför har det skapas ett filtreringsprogram som filtrerar bort skräppunkter ur ett punktmoln.
 	
 	\subsection{Att använda filtreringen}
 	För att använda filtret finns ett separat program som körs genom att anropa \texttt{filter} i terminalen. Användningen av filtret ser ut som följande:
@@ -241,7 +214,7 @@ Linköpings Tekniska Högskola, IDA
 		\begin{tabular}{p{0.2\linewidth}p{0.6\linewidth}}
 			Flagga & Förklaring \\
 			\hline
-			-h, \texttt{--}help & Skriv ut en hjälptext för filtret i terminalen. \\
+			-h, \texttt{--}help & Skriver ut en hjälptext för filtret i terminalen. \\
 			\hline
 			-c, \texttt{--}cutoff\_height & Anger hur högt upp objektet som skannades satt. Ange ett högre värde för objekt som satt längre ner, d.v.s. närmare bottenplattan på rotationsbordet. \\
 			\hline
@@ -253,18 +226,18 @@ Linköpings Tekniska Högskola, IDA
 
 	Filtret kan även användas i vidareutveckling av systemet genom att inkludera klassen \texttt{Filter.h} och använda filtret i C++.
 	
-	\subsection{Att använda grafiska användargränssnittet}
+	\subsection{Att använda det grafiska användargränssnittet}
 	
 	\subsection{Att använda kommandoradsgränsnittet}
 		För att använda programmet 3DCopy så kör man kommandot:
 		
 		\texttt{./3DCopy pcdfile1 pcdfile2 pcdfile3 ... outputfile}
 		
-		Där godtyckligt antal pcdfiler kan väljas. Dessa punktmoln kommer sedan att registreras och efter det kommer en mesh att genereras i det givna outputfile namnet. Ett exempel på hur man använder programmet från kommandoraden ser ut såhär:
+		Där godtyckligt antal pcdfiler kan väljas. Dessa punktmoln kommer sedan att registreras och efter det kommer en mesh att genereras med \textit{outputfile} som det givna filnamnet. Ett exempel på hur man använder programmet från kommandoraden ser ut såhär:
 		
 		\texttt{./3DCopy pcd\_file\_1 pcd\_file\_2 result}
 		
-		Detta kommer alltså att generera en mesh vid namn result som sparas i ett stl format. Denna fil kan sedan användas för att inspekteras i till exempel meshlab eller för att skriva ut objektet med en 3D-skrivare. Värt att nämna är att programmet kan även ta in en mapp fylld med pcd-filer istället för enstaka pcd-filer som ska behandlas. Programmet söker då automatisk igenom mappen och plockar ut de filer som ska registreras, exempel på hur detta ser ut:
+		Detta kommer alltså att generera en mesh med filnamn \textit{result} som sparas i ett .stl format. Denna fil kan sedan användas för att inspekteras i till exempel meshlab eller liknande program. Det går också att skriva ut objektet med en 3D-skrivare. Det som är värt att nämna är att programmet kan även ta in en mapp fylld med pcd-filer istället för enstaka pcd-filer som ska behandlas. Programmet söker då automatisk igenom mappen och plockar ut de filer som ska registreras, exempel på hur detta ser ut:
 		
 		\texttt{./3DCopy map\_with\_files result}
 		
@@ -272,13 +245,24 @@ Linköpings Tekniska Högskola, IDA
 		
 		\texttt{./3DCopy [kommando] pcdfile1 pcdfile2 pcdfile3 ... outputfile}
 		
-		Detta ger en möjlighet för användaren att välja vilken komponent som ska köras. Användaren kan enbart välja att köra meshningskomponenten eller registreringskomponenten. De kommandon som finns tillgängliga beskrivs nedan:
+		Detta ger en möjlighet för användaren att välja vilken komponent som ska köras. Användaren kan enbart välja att köra meshningskomponenten eller registreringskomponenten. De kommandon som finns tillgängliga beskrivs nedan i tabell \ref{tab:flaggor_cli}.
 		
-		\begin{itemize}
-			\item \textbf{-m} Enbart mesha objektet utifrån ett givet komplett punktmoln.
-			\item \textbf{-r} Enbart registrera punktmoln för att generera ett komplett punktmoln, hoppar över meshningen.
-			\item \textbf{-v} Gör att programmet talar om mer nödvändig information om vad som händer till användaren.
-		\end{itemize}
+		\begin{table}[h!]
+			\centering
+			\caption{Flaggor/kommandon för CLI.}
+			\label{tab:flaggor_cli}
+			
+			\begin{tabular}{p{0.2\linewidth}p{0.6\linewidth}}
+				Flagga & Förklaring \\
+				\hline
+				\texttt{-m} & Enbart mesha objektet utifrån ett givet komplett punktmoln. \\
+				\hline
+				\texttt{-r} & Enbart registrera punktmoln för att generera ett komplett punktmoln, hoppar över meshningen. \\
+				\hline
+				\texttt{-v} & Gör att programmet talar om mer nödvändig information om vad som händer till användaren. \\
+				\hline
+			\end{tabular}
+		\end{table}	
 		
 		För att enbart registrera punktmoln kan således detta kommando användas:
 		
@@ -292,8 +276,9 @@ Linköpings Tekniska Högskola, IDA
  	%% Skriv om eventuella tips till att felsöka diverse problem
 \newpage
     
-%\bibliographystyle{alpha}
-%\bibliography{sample}
+\section{Installation}
+	%% Skriva om hur man installerar vårt system?
+\newpage
 
 \end{document}
 
