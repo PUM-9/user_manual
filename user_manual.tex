@@ -25,6 +25,8 @@
 \usepackage{parskip} 
 \setcounter{secnumdepth}{5}
 
+\usepackage{float}
+
 
 \renewcommand{\dateseparator}{-}
 \addto\captionsswedish{% Replace "swedish" with the language you use (if using babel)
@@ -157,10 +159,45 @@ Examinator: Kristian Sandahl
 \section{Att använda systemet}
 	Som användare av systemet finns det två stycken sätt att använda systemet, ett kommandoradsgränssnitt, 3DCopy, samt ett grafiskt användargränssnitt. Med hjälp av dessa gränssnitt är det möjligt att ta en uppsättning av icke kompletta punktmoln för att generera en utskriftsbar 3D-mesh. Gränssnitten är anpassade för att ta in en uppsättning av punktmoln (.pcd-filer). För att använda systemet kan det vara vettigt att filtrera de punktmoln som är tänkta att använda. Därför har det skapas ett filtreringsprogram som filtrerar bort skräppunkter ur ett punktmoln.
 	
-	\subsection{Att använda TreeDWrapper}
-	% Lägg till text här
+	\subsection{Att använda TreeD-Wrapper}
+	TreeD-Wrapper är ett hjälpprogram som är till för att ta ett flertal skanningar med hjälp av programmet TreeD. Med TreeD-Wrapper kan man ta skanningar från ett antal rotationer på rotationsbordet automatiskt och samtidigt filtrera och placera dessa rätt. TreeD-Wrapper används via ett kommandoradsgränssnitt och kommer spara alla de filtrerade skanningarna i den mappen som användaren står i när den kör programmet. Programmet används som följande:
+	
+	\texttt{treed\_wrapper.py [options]}
+	
+	där options består av valfria flaggor att skicka in för att bestämma hur skanningarna och filtreringen ska utföras. Tabell \ref{tab:treedwrapper_flaggor} visar de flaggor som kan skickas in till programmet.
+	
+	Följande exempel tar 36 skanningar per varv vid 0 och 20 grader på curve (det vill säga 72 skanningar totalt) och visar sedan resultatet i pcl\_viewer:
+	
+	\texttt{treed\_wrapper.py --view -r 36 -c 0 20}
+	
+	TreeD-Wrapper är uppbyggd på så sätt att när en skanning misslyckas på grund av att något går fel så kraschar TreeD-Wrapper och säger vad som gått fel. Oftast kan fel lösas genom att starta om hårdvaran och/eller datorn som programmet körs på. TreeD-Wrapper kan sedan köras igen med samma parametrar som innan och kommer då fortsätta från den punkten då programmet kraschade vilket gör att det är enkelt att ta många skanningar även om det underliggande systemet inte alltid är stabilt.
+		
+	\begin{table}[H]
+		\centering
+		\caption{Flaggor för TreeD-Wrapper.}
+		\label{tab:treedwrapper_flaggor}
+		
+		\begin{tabular}{p{0.2\linewidth}p{0.6\linewidth}}
+			Flagga & Förklaring \\
+			\hline
+			-h, \texttt{--}help & Skriver ut en hjälptext för TreeD-Wrapper i terminalen. \\
+			\hline
+			-r, \texttt{--rotation} & Anger hur många skanningar som ska tas på ett varv runt y-axeln. Till exempel ger 36 skanningar per varv att skanningar tas med 10 grader mellan varje. \\
+			\hline
+			-c, \texttt{--curve} & Anger de rotationer i grader som ska användas för TreeD's curve, det vill säga rotationen kring x-axeln. Skickas in som en lista med rotationer, till exempel kan \texttt{-c 0 10 20} användas för att ta skanningar vid 0, 10 och 20 grader. \\
+			\hline
+			-w, \texttt{--view} & Öppna de filtrerade punktmolnen i pcl\_viewer då alla skanningar är klara. \\
+			\hline
+			\texttt{--cutoff\_height} & Anger den \texttt{cutoff\_height} som ska användas vid filtreringen, se avsnitt \ref{sec:filtrering}. \\
+			\hline
+			-f, \texttt{--filter\_only} & Ta inga nya skanningar utan filtrera endast de skanningar som redan tagits. \\
+			\hline
+		\end{tabular}
+		
+	\end{table}
 	
 	\subsection{Att använda filtreringen}
+	\label{sec:filtrering}
 	För att använda filtret finns ett separat program som körs genom att anropa \texttt{filter} i terminalen. Användningen av filtret ser ut som följande:
 	
 	\texttt{filter [options] sources}
@@ -171,7 +208,7 @@ Examinator: Kristian Sandahl
 	
 	De flaggor som kan skickas in till programmet visas i tabell \ref{tab:filter_flaggor}.
 	
-	\begin{table}[h!]
+	\begin{table}[H]
 		\centering
 		\caption{Flaggor för filtret.}
 		\label{tab:filter_flaggor}
@@ -179,11 +216,15 @@ Examinator: Kristian Sandahl
 		\begin{tabular}{p{0.2\linewidth}p{0.6\linewidth}}
 			Flagga & Förklaring \\
 			\hline
-			-h, \texttt{--}help & Skriver ut en hjälptext för filtret i terminalen. \\
+			-h, \texttt{--help} & Skriver ut en hjälptext för filtret i terminalen. \\
 			\hline
-			-c, \texttt{--}cutoff\_height & Anger hur högt upp objektet som skannades satt. Ange ett högre värde för objekt som satt längre ner, d.v.s. närmare bottenplattan på rotationsbordet. \\
+			-r, \texttt{--rotation} & Anger hur mycket det filtrerade punktmolnet ska roteras kring y-axeln i grader. \\
 			\hline
-			-s, \texttt{--}scale & Anger hur mycket objektet ska skalas på bredden för att få rätt proportioner. Det rekommenderas att köra skanningar med cart\_speed=200 och låta denna inställning ha sitt standardvärde (0.5). \\
+			-c, \texttt{--curve} & Anger hur mycket det filtrerade punktmolnet ska roteras kring x-axeln i grader. \\
+			\hline
+			\texttt{--cutoff\_height} & Anger hur högt upp objektet som skannades satt. Ange ett högre värde för objekt som satt längre ner, d.v.s. närmare bottenplattan på rotationsbordet. \\
+			\hline
+			-s, \texttt{--scale} & Anger hur mycket objektet ska skalas på bredden för att få rätt proportioner. Det rekommenderas att köra skanningar med cart\_speed=200 och låta denna inställning ha sitt standardvärde (0.5). \\
 			\hline
 		\end{tabular}
 	
