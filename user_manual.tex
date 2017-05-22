@@ -122,6 +122,8 @@ Examinator: Kristian Sandahl
     	\hline
     	0.4 & 2017-05-11 & Flyttade teknisk information till teknisk dokument & Hannes Tuhkala \\
     	\hline
+    	0.5 & 2017-05-22 & Skrev om installation av systemet & Martin Lundberg \\
+    	\hline
 \end{tabular}}
 \end{center}
 \newpage
@@ -283,7 +285,58 @@ Examinator: Kristian Sandahl
 \newpage
     
 \section{Installation}
-	%% Skriva om hur man installerar vårt system?
+\subsection{Installationsskript}
+	För att installera systemen 3DCopy och filtret tillhandahålls ett installationsskript. Skriptet kan användas för att installera systemen på en dator som kör Ubuntu.
+	
+	För att installera installera 3DCopy måste koden först hämtas vilket kan göras med följande kommando:
+	
+	\texttt{git clone https://github.com/PUM-9/3DCopy.git \\
+	cd 3DCopy}
+	
+	Kör sedan installationsskriptet:
+	
+	\texttt{./install.sh}
+	
+	För att installera filtret används samma metod:
+	
+	\texttt{git clone https://github.com/PUM-9/filter.git \\
+	cd filter \\
+	./install.sh}
+	
+	TreeD-Wrapper har inget installationsskript men för att använda det, kör
+	
+	\texttt{git clone https://github.com/PUM-9/treed\_wrapper.git}
+	
+	Själv skriptet som kör TreeD-Wrapper ligger sedan i \texttt{./treed\_wrapper/src/treed\_wrapper.py}. Det kan antingen köras direkt därifrån eller läggas i någon mapp som ligger i användarens sökväg (\texttt{PATH}) för att vara åtkomligt var som helst i systemet.
+	
+\subsection{Bygga själv}
+	Om man använder ett annat system än Ubuntu är det inte säkert att installationsskriptet fungerar. Då kan man behöva bygga systemet själv.
+	
+	Till att börja med måste man installera alla beroenden. Se till att systemet har PCL, Boost och CMake installerat. Se även till att systemet har alla paket som behövs för att kompilera C++. Hämta sedan hem koden genom
+	
+	\texttt{git clone https://github.com/PUM-9/3DCopy.git}
+	
+	och ställ dig i mappen med
+	
+	\texttt{cd 3DCopy}
+	
+	Skapa sedan en mapp för alla byggfiler och ställ dig i den genom att köra
+	
+	\texttt{mkdir build \\
+	cd build}
+	
+	Kör sedan CMake för att generera byggfiler för ditt system:
+	
+	\texttt{cmake ..}
+	
+	Till sist, bygg och installera 3DCopy genom att köra
+	
+	\texttt{make \\
+	sudo make install}
+
+	Motsvarande metod används för att bygga filtret men koden hämtas istället med kommandot
+	
+	\texttt{git clone https://github.com/PUM-9/filter.git}
 \newpage
 
 \end{document}
