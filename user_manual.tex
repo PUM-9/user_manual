@@ -234,6 +234,77 @@ Examinator: Kristian Sandahl
 	
 	\subsection{Att använda webbapplikationen}
 	
+	När man ansluter till webbapplikationen kommer man att mötas av ett gränssnitt som liknar det i figur \ref{fig:web_gui}. Det som kan variera är längden av listan med de jobb som är köade, körs eller som är klara.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=160mm]{images/gui_web.PNG}
+		\caption{Webbapplikationens användargränssnitt.}
+		\label{fig:web_gui}
+	\end{figure}
+
+	Uppe i vänstra hörnet finns knapparna \textit{Add registration job} och \textit{Add mesh job}.
+	
+	\subsubsection{Add registration job}
+	
+	Genom att trycka på \textit{Add registration job} så öppnas formuläret för att starta ett registreringsjobb. Formuläret visas i figur \ref{fig:reg_job_form}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=160mm]{images/reg_job_form.PNG}
+		\caption{Formuläret för att skapa ett registreringsjobb.}
+		\label{fig:reg_job_form}
+	\end{figure}
+
+	I formuläret för registreringsjobbet får man först välja namn på jobbet. Därefter får man välja vilken nivå som loggningen ska använda. Sedan ska man välja parametrarna för registreringen. Slutligen så trycker man på \textit{välj filer} och väljer de filer som ska registreras. Därefter trycker man på \textit{Create} och jobbet kommer då att skapas och skickas till servern och visas i listan i standardvyn. Om man trycker på \textit{Back} så avbryts processen för att skapa ett jobb och man kommer tillbaka till standardvyn som visar listan med jobb.
+	
+	\subsubsection{Add mesh job}
+	
+	Om man trycker på \textit{Add mesh job} så öppnas formuläret för att skapa ett meshningsjobb. Formuläret visas i figur \ref{fig:mesh_job_form}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=160mm]{images/mesh_job_form.PNG}
+		\caption{Formuläret för att skapa ett meshningsjobb.}
+		\label{fig:mesh_job_form}
+	\end{figure}
+
+	I formuläret för meshningsjobbet får man först välja namn på jobbet. Därefter får man välja vilken nivå som loggningen ska använda. Slutligen så får man välja vilken fil som ska meshas. Därefter trycker man på \textit{Create} och jobbet kommer då att skapas och skickas till servern och visas i listan i standardvyn. Om man trycker på \textit{Back} så avbryts processen för att skapa ett jobb och man kommer tillbaka till standardvyn som visar listan med jobb.
+	
+	\subsubsection{Jobblistan}
+	
+	När ett jobb är skapat så kommer det att visas i listan över existerande jobb. Hur ett jobb i listan ser ut visas i figur \ref{fig:job_in_list}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=160mm]{images/job_in_list.PNG}
+		\caption{Ett jobb i jobblistan.}
+		\label{fig:job_in_list}
+	\end{figure}
+
+	I första kolumnen visas vilken typ av jobb det är, i detta fall är det ett registreringsjobb. I andra kolumnen visas när jobbet skapades. I tredje kolumnen visas tidpunkten då jobbet startades och i fjärde kolumen visas när jobbet slutfördes. De tre sista kolumnerna innehåller knappar för att kunna interagera med jobbet.
+	
+	\subsubsection{View Job}
+	
+	OM man trycker på \textit{View Job} så kommer information om jobbet att visas. Hur informationen presenteras visas i figur \ref{view_job}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=160mm]{images/view_job.PNG}
+		\caption{Information om ett job.}
+		\label{fig:view_job}
+	\end{figure}
+
+	Förutom att se vilka parametrar som sattes på jobbet så kan man även se vilka filer som lades till. För att komma tillbaka till standardvyn så trycker man på \textit{Back}. Man kan även ta bort jobbet genom att trycka på \textit{Delete job}.
+	
+	\subsubsection{Start Job}
+	
+	\textit{Start Job} är den andra knappen som ett jobb har i listan. För att köra ett jobb så trycker man på \textit{Start Job}. Ett jobb kommer alltså inte att köras förrän någon har tryckt på \textit{Start Job}.
+	
+	\subsubsection{Delete Job}
+	
+	\textit{Delete Job} är den tredje och sista knappen som ett jobb har. Genom att trycka på \textit{Delete Job} så tar man bort jobbet ur listan. Jobbet tas även bort ur databasen och alla filer på serven som förknippas med jobbet tas också bort.
+	
 	\subsection{Att använda kommandoradsgränsnittet}
 		För att använda programmet 3DCopy så kör man kommandot:
 		
